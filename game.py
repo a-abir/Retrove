@@ -14,7 +14,6 @@ import sys
 from variables import *
 from spritesheet import spritesheet
 
-# Intitializes pygame and pygame font
 pygame.init()
 pygame.font.init()
 
@@ -59,8 +58,7 @@ class Block(pygame.sprite.Sprite):
         super().__init__()
         self.color = color
         if image == None:
-            self.image = pygame.Surface(
-                [block_width, block_height])
+            self.image = pygame.Surface([block_width, block_height])
             self.image.fill(self.color)
         else:
             self.image = image
