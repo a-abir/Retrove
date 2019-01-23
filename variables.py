@@ -131,12 +131,21 @@ powerup2_image_des = pygame.transform.scale2x(
     pygame.image.load(os.path.join(images_wd, "bullet_powerup.png")).convert_alpha())
 
 # Assets -- >
+block_image_des = powerup2_image_des = pygame.transform.scale2x(
+    pygame.image.load(os.path.join(images_wd, "cargo.png")).convert_alpha())
+block_image_des = powerup2_image_des = pygame.transform.scale2x(
+    pygame.image.load(os.path.join(images_wd, "cargo2.png")).convert_alpha())
+block_image_des = powerup2_image_des = pygame.transform.scale2x(
+    pygame.image.load(os.path.join(images_wd, "cargo3.png")).convert_alpha())
+
+game_block_list = [block_image_des, block_image_des, block_image_des]
+
 crown_image_des = pygame.transform.scale2x(
     pygame.image.load(os.path.join(images_wd, "crown.png")).convert_alpha())
 player_image_des = pygame.transform.scale2x(
     pygame.image.load(os.path.join(images_wd, "player_png.png")).convert_alpha())
 bullet_image_des = pygame.transform.scale2x(
-    pygame.image.load(os.path.join(images_wd, "bullet3.png")).convert_alpha())
+    pygame.image.load(os.path.join(images_wd, "hatch.png")).convert_alpha())
 test_sub = pygame.transform.scale2x(pygame.image.load(
     os.path.join(images_wd, "broken_health_powerup.png")).convert_alpha())
 

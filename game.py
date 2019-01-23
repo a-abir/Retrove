@@ -18,7 +18,7 @@ pygame.init()
 pygame.font.init()
 
 """
-accepts the parameter of "mute" after 
+accepts the parameter of "mute" after
 the command to mute all sounds
 """
 try:
@@ -51,7 +51,7 @@ class Block(pygame.sprite.Sprite):
         """
         Creates blocks using the color or the provided image
 
-        The triangular mode accepts x value (int) and sets 
+        The triangular mode accepts x value (int) and sets
         the blocks location to populate the given value more
             --It can be set to follow the players x location
         """
@@ -79,15 +79,18 @@ class Block(pygame.sprite.Sprite):
     def createBlocks(create_powerup=None):
         global block, powerup
         if create_powerup == None:
-            block = Block(random.choice(block_color_list), player.rect.x)
+            # block = Block(random.choice(block_color_list), player.rect.x)
+            block = Block(RED, 1, random.choice(game_block_list))
             block_list.add(block)
             allSpritesList.add(block)
         elif create_powerup == "powerup":
-            powerup = Block(REALLYRED, screenWidth/2, powerup_image_des)
+            # powerup = Block(REALLYRED, screenWidth/2, powerup_image_des)
+            powerup = Block(RED, 1, block_image_des)
             powerupList.add(powerup)
             allSpritesList.add(powerup)
         elif create_powerup == "powerup2":
-            powerup2 = Block(BLACK, screenWidth/2,  powerup2_image_des)
+            # powerup2 = Block(BLACK, screenWidth/2,  powerup2_image_des)
+            powerup2 = Block(RED, 1, block_image_des)
             powerupList2.add(powerup2)
             allSpritesList.add(powerup2)
 
@@ -118,7 +121,7 @@ class Player(pygame.sprite.Sprite):
         """
         Creates the player object
 
-        Accepts the parameter of an image for the player, 
+        Accepts the parameter of an image for the player,
         if not provided a square is used insted
         """
         super().__init__()
