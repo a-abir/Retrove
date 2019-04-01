@@ -18,7 +18,7 @@ pygame.init()
 pygame.font.init()
 
 """
-accepts the parameter of "mute" after 
+accepts the parameter of "mute" after
 the command to mute all sounds
 """
 try:
@@ -51,7 +51,7 @@ class Block(pygame.sprite.Sprite):
         """
         Creates blocks using the color or the provided image
 
-        The triangular mode accepts x value (int) and sets 
+        The triangular mode accepts x value (int) and sets
         the blocks location to populate the given value more
             --It can be set to follow the players x location
         """
@@ -79,15 +79,16 @@ class Block(pygame.sprite.Sprite):
     def createBlocks(create_powerup=None):
         global block, powerup
         if create_powerup == None:
-            block = Block(random.choice(block_color_list), player.rect.x)
+            # block = Block(random.choice(block_color_list), player.rect.x)
+            block = Block(REALLYRED, player.rect.x, random.choice(game_block_list))
             block_list.add(block)
             allSpritesList.add(block)
         elif create_powerup == "powerup":
-            powerup = Block(REALLYRED, screenWidth/2, powerup_image_des)
+            powerup = Block(REALLYRED, player.rect.x, powerup_image_des)
             powerupList.add(powerup)
             allSpritesList.add(powerup)
         elif create_powerup == "powerup2":
-            powerup2 = Block(BLACK, screenWidth/2,  powerup2_image_des)
+            powerup2 = Block(BLACK, player.rect.x,  powerup2_image_des)
             powerupList2.add(powerup2)
             allSpritesList.add(powerup2)
 
@@ -118,7 +119,7 @@ class Player(pygame.sprite.Sprite):
         """
         Creates the player object
 
-        Accepts the parameter of an image for the player, 
+        Accepts the parameter of an image for the player,
         if not provided a square is used insted
         """
         super().__init__()
@@ -352,7 +353,7 @@ def intro(exname=None):
     global name, highscore_name, highscore, \
         later_name, cur_pos
 
-    intro_background = BackgroundImage(background_image[0])
+    intro_background = BackgroundImage(background_image[3])
 
     intro = True
     t_num = [0, 0, 0, 0]
@@ -481,6 +482,9 @@ def gameloop():
     speed = constant_speed
     lives = starting_lives
     score = 0
+
+    priv_xVel = 0
+    priv_yVel = 0
     # pygame.mixer.music.stop()
     power_up.play()
     playMusic()
@@ -489,19 +493,19 @@ def gameloop():
     #     background_image[4])
     FirstStart, start = time.time(), time.time()
 
-    # try:
-    #     if str(sys.argv[1].lower()) == "6517":
-    #         score += 6517
-    #     elif str(sys.argv[1].lower()) == "easy":
-    #         increasingSpeed = 0.002
-    #     elif str(sys.argv[1].lower()) == "normal":
-    #         increasingSpeed = 0.003
-    #     elif str(sys.argv[1].lower()) == "hard":
-    #         increasingSpeed = 0.02
-    #     # elif str(sys.argv[1]) == "mute":
-    #     #     set_all_sounds(0)
-    # except Exception as e:
-    #     print(e)
+    try:
+        if str(sys.argv[1].lower()) == "6517":
+            score += 6517
+        elif str(sys.argv[1].lower()) == "easy":
+            increasingSpeed = 0.02
+        elif str(sys.argv[1].lower()) == "normal":
+            increasingSpeed = 0.05
+        elif str(sys.argv[1].lower()) == "hard":
+            increasingSpeed = 0.07
+        # elif str(sys.argv[1]) == "mute":
+        #     set_all_sounds(0)
+    except Exception as e:
+        print(e)
 
     while not done:
         screen.fill(BK_color)
@@ -589,8 +593,12 @@ def gameloop():
                         event.key == K_DOWN or event.key == K_s:
                     yVel = 0
 
+
         player.rect.x += xVel
         player.rect.y += yVel
+
+        priv_xVel = xVel if xVel > 0 else 1
+        player.rect.x += priv_xVel/2
 
         allSpritesList.draw(screen)
         allSpritesList.update()
@@ -629,7 +637,7 @@ def gameloop():
                 bulletList.remove(bullet)
                 allSpritesList.remove(bullet)
                 Block.createBlocks()
-                score += 100
+                score += 1000
                 # font_render = myfont.render(str(score),1,WHITE)
                 # print("score:" , score)
 
