@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 RETROVE
-Made by Mohammad Islam
+Made by Abrian Abir
 """
 
 import pygame
